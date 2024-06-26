@@ -1,0 +1,36 @@
+name: Check ads.txt Status
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  check-ads-txt:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Check ads.txt Status
+      run: |
+        curl -o ads.txt https://hmstr-kombat.netlify.app/ads.txt
+        if grep -q "ca-pub-3089886074644811" ads.txt; then
+          echo "ads.txt file is correct."
+        else
+          echo "ads.txt file is missing or incorrect."
+          exit 1
+        fi
+
+    - name: Send Notification
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.issues.createComment({
+            issue_number: 1, # Change to the number of the issue or pull request you want to comment on
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: "The ads.txt file is missing or incorrect. Please check your website."
+          })
