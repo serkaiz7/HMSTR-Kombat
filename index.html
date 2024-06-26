@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai's HMSTR Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="light-theme">
+    <div class="banner">
+        
+        <div class="hamster-container">
+            <img src="hamster-flex.gif" alt="Hamster 1" class="hamster">
+            <img src="hamster-cute.gif" alt="Hamster 2" class="hamster">
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+            <h1>Kai's HMSTR Calculator</h1>
+        </header>
+
+        <div id="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="hmstr-price.html">HMSTR Price</a></li>
+                    <li><a href="#" onclick="showSettings()">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main>
+            <div class="form-container">
+                <input type="text" id="companyName" placeholder="Company Name">
+                <input type="number" id="coinPrice" placeholder="Coin Price">
+                <input type="number" id="profitPerHour" placeholder="Profit per Hour">
+                <button onclick="addCompany()">Add Company</button>
+            </div>
+            <div class="list-container">
+                <ul id="companyList"></ul>
+            </div>
+            <button onclick="calculateBestInvestment()">Calculate Best Investment</button>
+            <div id="result"></div>
+            <canvas id="profitChart"></canvas>
+        </main>
+
+        <div class="settings" id="settings">
+            <div class="settings-content">
+                <span class="close-btn" onclick="hideSettings()">×</span>
+                <h2>Settings</h2>
+                <label for="themeSelector">Select Theme:</label>
+                <select id="themeSelector" onchange="changeTheme()">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
